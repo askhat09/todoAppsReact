@@ -36,6 +36,10 @@ const App = () => {
     toggleProperty(todoData, id, 'important')
   }
 
+  const markDone = (id) => {
+    toggleProperty(todoData, id, 'done')
+  }
+
   const addItem = (text) => {
     const newItem = {
       label: "Hello World",
@@ -59,7 +63,8 @@ const App = () => {
       <TodoList
         todos={todoData}
         onDeleted={deleteItem}
-        onMarkImportant={markImportant} />
+        onMarkImportant={markImportant}
+        onMarkDone={markDone} />
       <ItemAddField addItem={addItem} />
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import './TodoListItem.css'
 
-const TodoListItem = ({ label, onDeleted, onMarkImportant, important, done }) => {
+const TodoListItem = ({ label, onDeleted, onMarkImportant, onMarkDone, important, done }) => {
 
   let todoListItemLabel = "todo-list-item"
 
@@ -17,7 +17,7 @@ const TodoListItem = ({ label, onDeleted, onMarkImportant, important, done }) =>
     <span className={todoListItemLabel}>
       <span
         className="todo-list-item-label"
-      // onClick={onLabelClick}
+      onClick={onMarkDone}
       >
         {label}
       </span>
