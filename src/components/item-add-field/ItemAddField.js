@@ -6,7 +6,7 @@ const ItemAddField = ({addItem}) => {
     return (
         <button 
         className="add-field btn btn-outline-secondary"
-        onClick={addItem}
+        onClick={() => addItem("hello")}
         >ADD</button>
     )
 }

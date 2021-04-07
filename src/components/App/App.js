@@ -11,9 +11,9 @@ const App = () => {
 
   const [todoData, setTodoData] = useState(
     [
-      { label: "Drink Coffee", important: false, done: false, id: 1 },
-      { label: "Make Awesome App", important: false, done: false, id: 2 },
-      { label: "Have a lunch", important: false, done: false, id: 3 }
+      createItem('Drink Coffee'),
+      createItem('Make Awesome App'),
+      createItem('Have a lunch'),
     ]
   )
 
@@ -32,6 +32,15 @@ const App = () => {
     setTodoData(newArray)
   }
 
+  function createItem(label) {
+    return {
+      label,
+      important: false,
+      done: false,
+      id: Math.random() * 100
+    }
+  }
+
   const markImportant = (id) => {
     toggleProperty(todoData, id, 'important')
   }
@@ -41,12 +50,7 @@ const App = () => {
   }
 
   const addItem = (text) => {
-    const newItem = {
-      label: "Hello World",
-      important: false,
-      done: false,
-      id: Math.random() * 100
-    }
+    const newItem = createItem(text)
 
     const newData = [...todoData, newItem]
 
