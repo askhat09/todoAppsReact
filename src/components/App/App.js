@@ -23,13 +23,17 @@ const App = () => {
     setTodoData(newArray)
   }
 
-  const markImportant = (id) => {
-    const idx = todoData.findIndex(el => el.id === id)
-    const oldItem = todoData[idx]
-    const newItem = {...oldItem, important: !oldItem.important}
-    const newArray = [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]
+  const toggleProperty = (arr, id, propname) => {
+    const idx = arr.findIndex(el => el.id === id)
+    const oldItem = arr[idx]
+    const newItem = { ...oldItem, [propname]: !oldItem[propname] }
+    const newArray = [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
 
     setTodoData(newArray)
+  }
+
+  const markImportant = (id) => {
+    toggleProperty(todoData, id, 'important')
   }
 
   const addItem = (text) => {
