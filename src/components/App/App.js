@@ -11,9 +11,9 @@ const App = () => {
 
   const [todoData, setTodoData] = useState(
     [
-      { label: "Drink Coffee", important: false, id: 1 },
-      { label: "Make Awesome App", important: true, id: 2 },
-      { label: "Have a lunch", important: false, id: 3 }
+      { label: "Drink Coffee", important: false, done: false, id: 1 },
+      { label: "Make Awesome App", important: false, done: false, id: 2 },
+      { label: "Have a lunch", important: false, done: false, id: 3 }
     ]
   )
 
@@ -23,11 +23,21 @@ const App = () => {
     setTodoData(newArray)
   }
 
+  const markImportant = (id) => {
+    const idx = todoData.findIndex(el => el.id === id)
+    const oldItem = todoData[idx]
+    const newItem = {...oldItem, important: !oldItem.important}
+    const newArray = [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]
+
+    setTodoData(newArray)
+  }
+
   const addItem = (text) => {
     const newItem = {
       label: "Hello World",
       important: false,
-      id: Math.random()*100
+      done: false,
+      id: Math.random() * 100
     }
 
     const newData = [...todoData, newItem]
@@ -42,8 +52,11 @@ const App = () => {
         <SearchPanel />
         <ItemStatusFilter />
       </div>
-      <TodoList todos={todoData} onDeleted={deleteItem} />
-      <ItemAddField addItem={addItem}/>
+      <TodoList
+        todos={todoData}
+        onDeleted={deleteItem}
+        onMarkImportant={markImportant} />
+      <ItemAddField addItem={addItem} />
     </div>
   )
 }

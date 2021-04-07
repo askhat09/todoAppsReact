@@ -5,7 +5,7 @@ import './item-add-field.css'
 const ItemAddField = ({addItem}) => {
     return (
         <button 
-        className="add-field btn btn-secondary"
+        className="add-field btn btn-outline-secondary"
         onClick={addItem}
         >ADD</button>
     )

@@ -1,26 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './TodoListItem.css'
 
-const TodoListItem = ({ label, onDeleted }) => {
+const TodoListItem = ({ label, onDeleted, onMarkImportant, important, done }) => {
 
-  const [doneTodoListItem, setDoneTodoListItem] = useState(false)
-  const [markLabel, setMarkLabel] = useState(false)
-  
   let todoListItemLabel = "todo-list-item"
 
-  const onLabelClick = () => {
-    setDoneTodoListItem(doneTodoListItem => { return !doneTodoListItem })
-  }
-
-  const onMarkLabel = () => {
-    setMarkLabel(markLabel => { return !markLabel })
-  }
-
-  if (doneTodoListItem) {
+  if (done) {
     todoListItemLabel += " done"
   }
 
-  if (markLabel) {
+  if (important) {
     todoListItemLabel += " important"
   }
 
@@ -28,14 +17,14 @@ const TodoListItem = ({ label, onDeleted }) => {
     <span className={todoListItemLabel}>
       <span
         className="todo-list-item-label"
-        onClick={onLabelClick}
+      // onClick={onLabelClick}
       >
         {label}
       </span>
       <button type="button"
         className="btn btn-outline-success btn-sm float-right"
-        onClick={onMarkLabel}
-        >
+        onClick={onMarkImportant}
+      >
         <i className="fa fa-exclamation" />
       </button>
 
