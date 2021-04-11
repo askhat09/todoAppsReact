@@ -57,9 +57,12 @@ const App = () => {
     setTodoData(newData)
   }
 
+  const doneCount = todoData.filter(el => el.done).length
+  const todoCount = todoData.length - doneCount
+
   return (
     <div className="todo-app">
-      <AppHeader />
+      <AppHeader todo={todoCount} done={doneCount} />
       <div className="top-panel d-flex">
         <SearchPanel />
         <ItemStatusFilter />
