@@ -1,3 +1,7 @@
-.add-field {
+.item-add-form {
+    display: flex;
     margin: 10px 0
+}
+.form-control {
+    margin-right: 3px;
 }
