@@ -16,6 +16,7 @@ const App = () => {
       createItem('Have a lunch'),
     ]
   )
+  const [term, setTerm] = useState('')
 
   const deleteItem = (id) => {
     const idx = todoData.findIndex(el => el.id === id)
@@ -57,6 +58,21 @@ const App = () => {
     setTodoData(newData)
   }
 
+  const search = (items, term) => {
+    if(term.length === 0) {
+      return items
+    }
+    return items.filter(item => {
+      return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1
+    })
+  }
+
+  const visibleItems = search(todoData, term)
+
+  const onSearchChange = (term) => {
+    setTerm(term)
+  }
+
   const doneCount = todoData.filter(el => el.done).length
   const todoCount = todoData.length - doneCount
 
@@ -64,11 +80,11 @@ const App = () => {
     <div className="todo-app">
       <AppHeader todo={todoCount} done={doneCount} />
       <div className="top-panel d-flex">
-        <SearchPanel />
+        <SearchPanel searchChange={onSearchChange}/>
         <ItemStatusFilter />
       </div>
       <TodoList
-        todos={todoData}
+        todos={visibleItems}
         onDeleted={deleteItem}
         onMarkImportant={markImportant}
         onMarkDone={markDone} />
