@@ -17,6 +17,7 @@ const App = () => {
     ]
   )
   const [term, setTerm] = useState('')
+  const [filter, setFilter] = useState('active')
 
   const deleteItem = (id) => {
     const idx = todoData.findIndex(el => el.id === id)
@@ -59,7 +60,7 @@ const App = () => {
   }
 
   const search = (items, term) => {
-    if(term.length === 0) {
+    if (term.length === 0) {
       return items
     }
     return items.filter(item => {
@@ -67,10 +68,27 @@ const App = () => {
     })
   }
 
-  const visibleItems = search(todoData, term)
+  const filterItems = (items, filter) => {
+    switch (filter) {
+      case 'all':
+        return items;
+      case 'active':
+        return items.filter(item => !item.done)
+      case 'done':
+        return items.filter(item => item.done)
+      default:
+        return items;
+    }
+  }
+
+  const visibleItems = filterItems(search(todoData, term), filter)
 
   const onSearchChange = (term) => {
     setTerm(term)
+  }
+
+  const onFilterChange = (filter) => {
+    setFilter(filter)
   }
 
   const doneCount = todoData.filter(el => el.done).length
@@ -80,8 +98,8 @@ const App = () => {
     <div className="todo-app">
       <AppHeader todo={todoCount} done={doneCount} />
       <div className="top-panel d-flex">
-        <SearchPanel searchChange={onSearchChange}/>
-        <ItemStatusFilter />
+        <SearchPanel searchChange={onSearchChange} />
+        <ItemStatusFilter filter={filter} onFilterChange={onFilterChange} />
       </div>
       <TodoList
         todos={visibleItems}
